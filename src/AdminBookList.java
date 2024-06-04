@@ -6,6 +6,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +82,15 @@ public class AdminBookList {
         ImageIcon backButtonImage = new ImageIcon("./assets/back_button.png");
         JLabel backButtonLabel = new JLabel(backButtonImage);
         backButtonLabel.setBounds(804, 0, 220, 141);
+        backButtonLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Handle the click event for the backButtonLabel here
+                // Add your code logic here
+                frame.dispose();
+                new AdminMenu();
+            }
+        });
         panel.add(backButtonLabel);
 
         // Set the layered pane as the content pane

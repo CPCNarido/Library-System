@@ -53,9 +53,11 @@ public class BorrowerList extends JFrame {
      */
     public BorrowerList() {
         // Load the background image
-        backgroundImage = new ImageIcon("C:/Users/cj/Downloads/Borrowers List.png").getImage();
+        backgroundImage = new ImageIcon("./assets/borrower_list.png").getImage();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1024, 768); // Set the size of the JFrame to 1024x768
+        setLocationRelativeTo(null); // Center the JFrame
+        setResizable(false); // Disable resizing
 
         // Create a custom JPanel to draw the background image
         contentPane = new JPanel() {
@@ -90,7 +92,7 @@ public class BorrowerList extends JFrame {
 
         // Create a button with an image and make it transparent
         JButton btnNewButton = new JButton();
-        btnNewButton.setIcon(new ImageIcon("C:/Users/cj/Downloads/Back Button.png"));
+        btnNewButton.setIcon(new ImageIcon("./assets/back_button.png"));
         btnNewButton.setBounds(804, 0, 220, 141);
         btnNewButton.setContentAreaFilled(false);
         btnNewButton.setBorderPainted(false);
@@ -98,6 +100,8 @@ public class BorrowerList extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Action to be performed when button is clicked
                 System.out.println("Button clicked");
+                dispose();
+                new AdminMenu();
             }
         });
         contentPane.add(btnNewButton);
@@ -138,6 +142,7 @@ public class BorrowerList extends JFrame {
 
         // Add initial data to the table
         updateTableContent("STUDENT'S LIST");
+        setVisible(true);
     }
 
     /**

@@ -1,14 +1,11 @@
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -17,21 +14,36 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
-public class UserMenu extends JPanel {
-    private Image backgroundImage;
+public class UserMenu extends JFrame {
     private JButton BOOKLIST_Button;
     private JButton LOGOUT_BUTTON;
     private JButton BOOKBORROWING_Button;
     private JButton BOOKRETURNING_Button;
 
     public UserMenu() {
-        // Load the background image
-        backgroundImage = new ImageIcon("Menu-Admin.png").getImage();
-
-        // Set panel properties
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1024, 768); // Set the size of the frame
         setLayout(null); // Use absolute positioning
 
+        // Background panel
+        JPanel backgroundPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(new ImageIcon("./assets/menu_borrower.png").getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        backgroundPanel.setBounds(0, 0, 1024, 768);
+        backgroundPanel.setLayout(null);
+
+        // Create and add buttons to the background panel
+        createButtons(backgroundPanel);
+
+        add(backgroundPanel); // Add the background panel to the frame
+        setVisible(true);
+    }
+
+    private void createButtons(JPanel backgroundPanel) {
         // Create BOOKLIST button
         BOOKLIST_Button = new JButton() {
             @Override
@@ -69,7 +81,7 @@ public class UserMenu extends JPanel {
         booklistContentPanel.setOpaque(false); // Make the panel transparent
 
         // Load the icon image and create a label to display it
-        ImageIcon booklistIcon = new ImageIcon("Booklist_Icon.png");
+        ImageIcon booklistIcon = new ImageIcon("./assets/Booklist_Icon.png");
         JLabel booklistIconLabel = new JLabel(booklistIcon);
         booklistIconLabel.setAlignmentX(CENTER_ALIGNMENT); // Center align the icon
         booklistContentPanel.add(booklistIconLabel);
@@ -90,11 +102,12 @@ public class UserMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Handle button click action here
-                System.out.println("BOOKLIST button clicked!");
+                new BorrowerBookList();
+                dispose();
             }
         });
 
-        add(BOOKLIST_Button); // Add BOOKLIST button to the panel
+        backgroundPanel.add(BOOKLIST_Button); // Add BOOKLIST button to the panel
 
         // Create LOGOUT button
         LOGOUT_BUTTON = new JButton() {
@@ -133,7 +146,7 @@ public class UserMenu extends JPanel {
         logoutContentPanel.setOpaque(false); // Make the panel transparent
 
         // Load the icon image and create a label to display it
-        ImageIcon logoutIcon = new ImageIcon("LOGOUT.png");
+        ImageIcon logoutIcon = new ImageIcon("./assets/LOGOUT.png");
         JLabel logoutIconLabel = new JLabel(logoutIcon);
         logoutIconLabel.setAlignmentX(CENTER_ALIGNMENT); // Center align the icon
         logoutContentPanel.add(logoutIconLabel);
@@ -158,7 +171,7 @@ public class UserMenu extends JPanel {
             }
         });
 
-        add(LOGOUT_BUTTON); // Add LOGOUT button to the panel
+        backgroundPanel.add(LOGOUT_BUTTON); // Add LOGOUT button to the panel
         
         // Create BOOKBORROWING button
         BOOKBORROWING_Button = new JButton() {
@@ -191,16 +204,15 @@ public class UserMenu extends JPanel {
         BOOKBORROWING_Button.setOpaque(false);
         BOOKBORROWING_Button.setForeground(Color.WHITE); // Set button text color
 
-        // Create a panel to hold the icon and text in a row
+        // Create a panel to hold the icon and text vertically
         JPanel bookborrowingContentPanel = new JPanel();
         bookborrowingContentPanel.setLayout(new BoxLayout(bookborrowingContentPanel, BoxLayout.Y_AXIS));
         bookborrowingContentPanel.setOpaque(false); // Make the panel transparent
 
         // Load the icon image and create a label to display it
-        ImageIcon bookborrowingIcon = new ImageIcon("BOOKBORROWING.png");
+        ImageIcon bookborrowingIcon = new ImageIcon("./assets/BOOKBORROWING.png");
         JLabel bookborrowingIconLabel = new JLabel(bookborrowingIcon);
         bookborrowingIconLabel.setAlignmentX(CENTER_ALIGNMENT); // Center align the icon
-        bookborrowingIconLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, -1, 0)); // Add margin to the top
         bookborrowingContentPanel.add(bookborrowingIconLabel);
 
         // Add a vertical gap of 5 pixels
@@ -211,7 +223,6 @@ public class UserMenu extends JPanel {
         bookborrowingTextLabel.setFont(new Font("Raleway", Font.BOLD, 18)); // Set the font to bold and size 18
         bookborrowingTextLabel.setForeground(Color.WHITE); // Set the text color
         bookborrowingTextLabel.setAlignmentX(CENTER_ALIGNMENT); // Center align the text
-        bookborrowingTextLabel.setBorder(BorderFactory.createEmptyBorder(-5, 0, 0, 0)); // Add margin to the top
         bookborrowingContentPanel.add(bookborrowingTextLabel);
 
         BOOKBORROWING_Button.add(bookborrowingContentPanel); // Add content panel to the BOOKBORROWING button
@@ -224,10 +235,9 @@ public class UserMenu extends JPanel {
             }
         });
 
-        add(BOOKBORROWING_Button); // Add BOOKBORROWING button to the panel
+        backgroundPanel.add(BOOKBORROWING_Button); // Add BOOKBORROWING button to the panel
 
-
-        //BOOK RETURNING
+        // Create BOOKRETURNING button
         BOOKRETURNING_Button = new JButton() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -258,30 +268,28 @@ public class UserMenu extends JPanel {
         BOOKRETURNING_Button.setOpaque(false);
         BOOKRETURNING_Button.setForeground(Color.WHITE); // Set button text color
 
-        // Create a panel to hold the icon and text in a row
+        // Create a panel to hold the icon and text vertically
         JPanel bookreturningContentPanel = new JPanel();
         bookreturningContentPanel.setLayout(new BoxLayout(bookreturningContentPanel, BoxLayout.Y_AXIS));
         bookreturningContentPanel.setOpaque(false); // Make the panel transparent
 
         // Load the icon image and create a label to display it
-        ImageIcon bookreturningIcon = new ImageIcon("BOOKRETURNING.png");
+        ImageIcon bookreturningIcon = new ImageIcon("./assets/BOOKRETURNING.png");
         JLabel bookreturningIconLabel = new JLabel(bookreturningIcon);
         bookreturningIconLabel.setAlignmentX(CENTER_ALIGNMENT); // Center align the icon
-        bookreturningIconLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // Add margin to the top
         bookreturningContentPanel.add(bookreturningIconLabel);
 
         // Add a vertical gap of 5 pixels
         bookreturningContentPanel.add(Box.createVerticalStrut(5));
 
-        // Create a label for the text "BOOK BORROWING"
+        // Create a label for the text "BOOK RETURNING"
         JLabel bookreturningTextLabel = new JLabel("BOOK RETURNING");
         bookreturningTextLabel.setFont(new Font("Raleway", Font.BOLD, 18)); // Set the font to bold and size 18
         bookreturningTextLabel.setForeground(Color.WHITE); // Set the text color
         bookreturningTextLabel.setAlignmentX(CENTER_ALIGNMENT); // Center align the text
-        bookreturningTextLabel.setBorder(BorderFactory.createEmptyBorder(-4, 0, 0, 0)); // Add margin to the top
         bookreturningContentPanel.add(bookreturningTextLabel);
 
-        BOOKRETURNING_Button.add(bookreturningContentPanel); // Add content panel to the BOOKBORROWING button
+        BOOKRETURNING_Button.add(bookreturningContentPanel); // Add content panel to the BOOKRETURNING button
 
         BOOKRETURNING_Button.addActionListener(new ActionListener() {
             @Override
@@ -291,24 +299,10 @@ public class UserMenu extends JPanel {
             }
         });
 
-        add(BOOKRETURNING_Button); // Add BOOKBORROWING button to the panel
-
-        JFrame frame = new JFrame("Main Menu");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        UserMenu panel = new UserMenu();
-        panel.setPreferredSize(new Dimension(1024, 768));
-
-        frame.getContentPane().add(panel);
-        frame.pack();
-        frame.setVisible(true);
+        backgroundPanel.add(BOOKRETURNING_Button); // Add BOOKRETURNING button to the panel
     }
 
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        // Draw the background image
-        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+    public static void main(String[] args) {
+        new UserMenu();
     }
 }
