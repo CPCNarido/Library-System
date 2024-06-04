@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 public class UserMenu extends JFrame {
     private JButton BOOKLIST_Button;
@@ -24,6 +25,7 @@ public class UserMenu extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1024, 768); // Set the size of the frame
         setLayout(null); // Use absolute positioning
+        setLocationRelativeTo(null); // Center the frame    
 
         // Background panel
         JPanel backgroundPanel = new JPanel() {
@@ -102,8 +104,8 @@ public class UserMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Handle button click action here
-                new BorrowerBookList();
                 dispose();
+                SwingUtilities.invokeLater(BorrowerBookList::createAndShowGUI);
             }
         });
 
@@ -146,7 +148,7 @@ public class UserMenu extends JFrame {
         logoutContentPanel.setOpaque(false); // Make the panel transparent
 
         // Load the icon image and create a label to display it
-        ImageIcon logoutIcon = new ImageIcon("./assets/LOGOUT.png");
+        ImageIcon logoutIcon = new ImageIcon("./assets/logout_icon.png");
         JLabel logoutIconLabel = new JLabel(logoutIcon);
         logoutIconLabel.setAlignmentX(CENTER_ALIGNMENT); // Center align the icon
         logoutContentPanel.add(logoutIconLabel);
@@ -167,7 +169,9 @@ public class UserMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Handle button click action here
-                System.out.println("LOGOUT button clicked!");
+                // System.out.println("LOGOUT button clicked!");
+                new LoginFrame();
+                dispose();
             }
         });
 
@@ -231,7 +235,8 @@ public class UserMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Handle button click action here
-                System.out.println("BOOK BORROWING button clicked!");
+                // System.out.println("BOOK BORROWING button clicked!");
+                // new BookBorrowing();
             }
         });
 
@@ -295,7 +300,9 @@ public class UserMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Handle button click action here
-                System.out.println("BOOK RETURNING button clicked!");
+                // System.out.println("BOOK RETURNING button clicked!");
+                new BookReturning();
+                dispose();
             }
         });
 

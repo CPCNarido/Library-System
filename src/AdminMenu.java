@@ -87,7 +87,8 @@ public class AdminMenu extends JFrame {
         }
         //borrower window
         private void openBorrowerListWindow() {
-            //    new BookBorrowerList(); 
+            new BorrowerList(); 
+            dispose();
         }
         //borrowed books window
         private void openBooksBorrowedWindow() {

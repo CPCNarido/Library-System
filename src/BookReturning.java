@@ -245,12 +245,8 @@ public class BookReturning {
 		backBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         // Add an action listener to handle the button click
         backBtn.addActionListener(e -> {
-			// OPEN MAIN MENU
-			// if(User.user_type.equals("admin")) {
-
-			// } else {
-
-			// }
+			new UserMenu();
+			frame.dispose();
 		});
 
 		// Add the button to the background panel
@@ -354,5 +350,7 @@ public class BookReturning {
 		}
 
 		frame.setContentPane(setBackgroundPanel("./assets/book_returning.png"));
+		frame.setVisible(true);
+		System.out.println("Book Returning created");
 	}
 }

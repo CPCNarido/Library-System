@@ -35,7 +35,7 @@ public class BorrowerBookList {
         JFrame frame = new JFrame("Book List For Borrower");
         frame.setSize(1024, 768);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        
         // Create a layered pane to hold components
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setPreferredSize(new Dimension(1024, 768));
@@ -82,7 +82,7 @@ public class BorrowerBookList {
             @Override
             public void mouseClicked(MouseEvent e) {
                 frame.dispose();
-                new AdminMenu();
+                new UserMenu();
             }
         });
         panel.add(backButtonLabel);
@@ -120,6 +120,7 @@ public class BorrowerBookList {
 
         // Make frame visible
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 
     static class CustomComboBoxUI extends BasicComboBoxUI {
